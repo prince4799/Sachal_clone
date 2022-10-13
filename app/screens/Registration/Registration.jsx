@@ -21,7 +21,6 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { loadUserReg } from '../../api/actions/UserRegAction'
-// import DeviceInfo from 'react-native-device-info';
 
 // import { getReadableVersion } from 'react-native-device-info';
 
@@ -48,12 +47,12 @@ import { CONSTANTS } from '../../utils/constants/Constants';
 
 const Registration = (props) => {
   // const [emp_id, setEmp_id] = useState('111401X')
-  const [emp_id, setEmp_id] = useState('')
+  const [emp_id, setEmp_id] = useState('Prince')
   const [isLoading, setLoading] = useState(false)
   const prevCountRef = useRef();
   const userReg = {
     "type": "TRUE",
-    "msg": "Otp will be sent to your",
+    "msg": "Otp will be sent to your registered Mobile No.",
     "data": []
   }
 
