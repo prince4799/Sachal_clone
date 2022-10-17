@@ -7,8 +7,10 @@ import {
   View,
   ImageBackground,
   Animated,
-  useWindowDimensions
+  useWindowDimensions,
+  // ViewPagerAndroid,
 } from "react-native";
+
 
 // const images = new Array(6).fill('https://images.unsplash.com/photo-1556740749-887f6717d7e4');
 
@@ -135,62 +137,68 @@ export default ViewPager = () => {
   // const rotateValueHolder = React.useRef(new Animated.Value("0deg")).current;
   React.useEffect(() => {
     Animated.loop
-    ( Animated.sequence([
+      (Animated.sequence([
         Animated.timing(fadeAnim, {
-      toValue: 0.6,
-      duration: 100,
-      useNativeDriver: false
-    }),
-    Animated.timing(fadeAnim, {
-      toValue:0.5,
-      duration: 200,
-      useNativeDriver: false
-    }),
-    Animated.timing(fadeAnim, {
-      toValue: 0.3,
-      duration: 200,
-      useNativeDriver: false
-    }),
-    Animated.timing(fadeAnim, {
-      toValue: 0.2,
-      duration: 500,
-      useNativeDriver: false
-    })
-    ]),
-      {iterations:-1}).start();
+          toValue: 0.6,
+          duration: 100,
+          useNativeDriver: false
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 0.5,
+          duration: 200,
+          useNativeDriver: false
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 0.3,
+          duration: 200,
+          useNativeDriver: false
+        }),
+        Animated.timing(fadeAnim, {
+          toValue: 0.2,
+          duration: 500,
+          useNativeDriver: false
+        })
+      ]),
+        { iterations: -1 }).start();
   },);
-  React.useEffect(() =>{
+  React.useEffect(() => {
     Animated.loop(
-    Animated.timing(animate, {
-      toValue: 0,
-      tension: 5,
-      friction: 5,
-       duration:1000,
-      useNativeDriver: false,
-      iterations:-1
-    })).start();
- });
-    const setInterpolate = animate.interpolate({
-  inputRange: [0,30,40,50,60,70,80,90,100,120,130,140,150,160,170,180],
-  outputRange: ['0deg','30deg','40deg','50deg','60deg','70deg','80deg','90deg','100deg','120deg','130deg','140deg','150deg','160deg','170deg','180deg'],
-  // outputRange: ['10deg','20deg','30deg','40deg','50deg','60deg','70deg','80deg','90deg'],
-});
+      Animated.timing(animate, {
+        toValue: 0,
+        tension: 5,
+        friction: 5,
+        duration: 1000,
+        useNativeDriver: false,
+        iterations: -1
+      })).start();
+  });
+  const setInterpolate = animate.interpolate({
+    inputRange: [0, 30, 40, 50, 60, 70, 80, 90, 100, 120, 130, 140, 150, 160, 170, 180],
+    outputRange: ['0deg', '30deg', '40deg', '50deg', '60deg', '70deg', '80deg', '90deg', '100deg', '120deg', '130deg', '140deg', '150deg', '160deg', '170deg', '180deg'],
+    // outputRange: ['10deg','20deg','30deg','40deg','50deg','60deg','70deg','80deg','90deg'],
+  });
 
-React.useEffect(()=>{
-  
-})
+  React.useEffect(() => {
+
+  })
 
   return (
-    
-    < View style={{flex:1,backgroundColor: '#000',}}>
-    {/* <Animated.Text style={[styles.text,{ textShadowRadius: fadeAnim }]}>PRINCE </Animated.Text> */}
-    <View style={{flexDirection:'row',alignSelf:'center',top:'50%',}}>
-    <Animated.View style={{height:120,width:120,backgroundColor:'blue',marginLeft:25,position:'absolute',opacity:fadeAnim, transform: [{rotateY: setInterpolate}]}}/>
-    <Animated.View style={{height:120,width:120,backgroundColor:'royalblue',position:'absolute',top:25,
-      transform: [{rotateY: setInterpolate}]
-  }}/>
-    </View>
-    <Animated.Text style={[styles.text,{ textShadowRadius: fadeAnim }]}>PRINCE </Animated.Text>
+
+    < View style={{ flex: 1, backgroundColor: '#000', }}>
+      {/* <Animated.Text style={[styles.text,{ textShadowRadius: fadeAnim }]}>PRINCE </Animated.Text> */}
+      <View style={{ flexDirection: 'row', alignSelf: 'center', top: '50%', backgroundColor: '#fff', height: 200, width: 200 }}>
+        <Animated.View style={{
+          height: 120, width: 120, backgroundColor: 'blue', marginLeft: 25, position: 'absolute',
+           opacity: fadeAnim,
+           transform: [{ rotateY: setInterpolate }]
+        }} />
+        <Animated.View style={{
+          height: 120, width: 120, backgroundColor: 'royalblue', position: 'absolute', top: 25,
+          transform: [{ rotateY: setInterpolate }]
+        }} />
+      
+      </View>
+      {/* <Animated.Text style={[styles.text,{ textShadowRadius: fadeAnim }]}>PRINCE </Animated.Text> */}
     </View>
   )
 }
@@ -216,3 +224,6 @@ const styles = StyleSheet.create({
     // }
   }
 })
+
+
+

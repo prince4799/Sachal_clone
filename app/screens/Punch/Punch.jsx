@@ -8,9 +8,12 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Image
 } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { FlatList } from 'react-native-gesture-handler';
+import { IMAGES } from '../../res/Images'
+
 
 import {
   Colors,
@@ -22,14 +25,13 @@ import {
 
 const HEIGHT = Dimensions.get('screen').height
 const WIDTH = Dimensions.get('screen').width
-const day = new Date().getDate()
+var attendMonth = new Date().getMonth() + 1
 const month = new Intl.DateTimeFormat('en-US', { month: 'short' }).format()
 const year = new Date().getFullYear()
 // const date=day+''+month
 // const date=new Date().toDateString().startsWith(' ')
-const date = `${month} ${year}`
+// const date = `${month} ${year}`
 
-import { IMAGES } from '../../res/Images'
 
 const Punch = () => {
 
@@ -57,6 +59,7 @@ const Punch = () => {
     { EMP_NO: "Prince", PUNCH_DATE: "11-10-2022", PUNCH: ["09: 01", "", "", "", "", ""] }
 
   ])
+  const [monthText,setMonthText]=useState(month)
 
   const [tabs, setTabs] = useState('Daily')
 
@@ -68,42 +71,45 @@ const Punch = () => {
     let myArray = []
 
     switch (dummy) {
-      case dummy > 0 && dummy < 9:
-        return;
-      case dummy > 9 && dummy < 12:
-        myArray=[...myArray,'']
+
+      case 10:
         myArray[0] = time
         break;
-      case dummy > 12 && dummy < 2:
-        myArray=[...myArray,'']
+      case 11:
         myArray[1] = time;
         break;
-      case dummy > 2 && dummy < 4:
-        myArray=[...myArray,'']
+      case 12:
         myArray[2] = time;
         break;
+      case 13:
+        myArray[3] = time;
+        break;
+      case 14:
+        myArray[4] = time;
+        break;
+      case 15:
+        myArray[5] = time;
+        break;
       default:
-        myArray=[...myArray,'']
-        myArray[3] = time
         break;
     }
-    console.log('.......',myArray);
+    console.log('.......', myArray);
     setPuncRes('')
-    let day=new Date().getDate()
-    let month= new Date().getMonth()+1
-    let year =new Date().getFullYear()
+    let day = new Date().getDate()
+    let month = new Date().getMonth() + 1
+    let year = new Date().getFullYear()
 
-    let punchDate=`${day}-${month}-${year}`
+    let punchDate = `${day}-${month}-${year}`
     // let punchDate={day}+"-"+{month}+"-"+${year}`
     // if(time==)
     newArr.push({
       EMP_NO: "Prince1",
-      PUNCH_DATE:punchDate,
+      PUNCH_DATE: punchDate,
       // PUNCH: ["","","","","","",]
       PUNCH: myArray
     })
     setPuncRes(newArr)
-    console.log("..", day,month,year,punchDate, typeof (newArr[0].PUNCH_DATE));
+    console.log("..", day, month, year, punchDate, typeof (newArr[0].PUNCH_DATE));
   }
 
 
@@ -130,17 +136,76 @@ const Punch = () => {
 
   //   }
 
-    //===============================================================================================================
-  
-  tableColor=(val)=>{
+  //===============================================================================================================
+
+  tableColor = (val) => {
     // console.log("..", Boolean(val));
-    colorType=Boolean(val)
-    switch(colorType)
-    {
+    colorType = Boolean(val)
+    switch (colorType) {
       case true:
         return 'green'
       default:
         return 'grey'
+    }
+  }
+
+  monthDec=(val)=>{
+    if(val>1){
+      attendMonth=val-1;
+      changeMonth(attendMonth)
+    }
+  }
+
+  monthInc=(val)=>{
+    if(val>=1&&val<12){
+      attendMonth=val+1;
+      changeMonth(attendMonth)
+    }
+  }
+
+  changeMonth = (val) => {
+    // console.log(val);
+
+    switch (val) {
+      case 1:
+        setMonthText('Jan');
+        break;
+      case 2:
+        setMonthText('Feb');
+        break;
+      case 3:
+        setMonthText('Mar');
+        break;
+      case 4:
+        setMonthText('Apr');
+        break;
+      case 5:
+        setMonthText('May');
+        break;
+      case 6:
+        setMonthText('Jun');
+        break;
+      case 7:
+        setMonthText('Jul');
+        break;
+      case 8:
+        setMonthText('Aug');
+        break;
+      case 9:
+        setMonthText('Sept');
+        break;
+      case 10:
+        setMonthText('Oct');
+        break;
+      case 11:
+        setMonthText('Nov');
+        break;
+      case 12:
+        setMonthText('Dec');
+        break;
+      default:
+        setMonthText( new Intl.DateTimeFormat('en-US', { month: 'short' }).format());
+        break;
     }
   }
 
@@ -163,10 +228,16 @@ const Punch = () => {
           alignSelf: 'center',
           fontSize: 12,
           marginTop: '15%',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
         // onPress={() => console.log(".......", new Date().toLocaleDateString())}
         onPress={() => markAttendence()}
-      />
+      ><Image
+          source={IMAGES.PUNCH}
+          style={{ height: 95, width: 95, borderRadius: 50, }}
+
+        /></TouchableOpacity>
       <Text style={{ alignSelf: 'center', fontSize: 12, margin: 5 }}>(Click on Punch Button for Marking Your Attendence)</Text>
       <View style={{
         height: 40,
@@ -184,8 +255,42 @@ const Punch = () => {
       </View>
 
       {/* <Text>{date}</Text> */}
+      <View style={{ justifyContent: 'space-between', flexDirection: 'row', width: '40%', alignSelf: 'center' }}>
+        <TouchableOpacity
+          onPress={() => monthDec(attendMonth)}
+          style={{
+            // backgroundColor:'green',
+            marginVertical: 10
+          }}>
+          <Image
+            style={{ height: 25, width: 25, alignSelf: 'center' }}
+            source={IMAGES.LEFT}
+          />
+        </TouchableOpacity>
 
-      <Text style={{ alignSelf: 'center', margin: 15, backgroundColor: '#9daaaa', padding: 5, paddingHorizontal: 25 }}>{date}</Text>
+        <Text style={{
+          alignSelf: 'center',
+          marginVertical: 10,
+          backgroundColor: '#9daaaa',
+          padding: 5,
+          paddingHorizontal: 25
+        }}>
+          {monthText}  {year}
+        </Text>
+        <TouchableOpacity
+          onPress={() => monthInc(attendMonth)}
+
+          style={{
+            // backgroundColor:'green',
+            marginVertical: 10
+          }}>
+          <Image
+            style={{ height: 25, width: 25, alignSelf: 'center' }}
+            source={IMAGES.RIGHT}
+          />
+        </TouchableOpacity>
+      </View>
+
 
       <View style={{ flexDirection: 'row', width: '95%', alignSelf: 'center', justifyContent: 'center' }}>
 
@@ -217,12 +322,12 @@ const Punch = () => {
             <View style={{ flexDirection: 'row', alignSelf: 'center', justifyContent: 'center', width: '100%' }}>
 
               <Text style={{ borderColor: '#06BEBD', borderWidth: 1, width: '17%', textAlign: 'center', fontSize: 10 }}>{item.PUNCH_DATE}</Text>
-              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[0])}}>{item.PUNCH[0]}</Text>
-              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[1])  }}>{item.PUNCH[1]}</Text>
-              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[2])  }}>{item.PUNCH[2]}</Text>
-              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[3])  }}>{item.PUNCH[3]}</Text>
-              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[4])  }}>{item.PUNCH[4]}</Text>
-              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[5])  }}>{item.PUNCH[5]}</Text>
+              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[0]) }}>{item.PUNCH[0]}</Text>
+              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[1]) }}>{item.PUNCH[1]}</Text>
+              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[2]) }}>{item.PUNCH[2]}</Text>
+              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[3]) }}>{item.PUNCH[3]}</Text>
+              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[4]) }}>{item.PUNCH[4]}</Text>
+              <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[5]) }}>{item.PUNCH[5]}</Text>
             </View>
           </View>
         )}
