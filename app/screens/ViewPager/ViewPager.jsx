@@ -8,6 +8,7 @@ import {
   ImageBackground,
   Animated,
   useWindowDimensions,
+  Button,
   // ViewPagerAndroid,
 } from "react-native";
 
@@ -129,6 +130,7 @@ import {
 export default ViewPager = () => {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
   let animate = React.useRef(new Animated.Value(180)).current;
+  const myRef=useRef(null)
 
   animate.addListener(({ value }) => {
     current = value;
@@ -180,6 +182,7 @@ export default ViewPager = () => {
 
   React.useEffect(() => {
 
+    // console.
   })
 
   return (
@@ -187,7 +190,9 @@ export default ViewPager = () => {
     < View style={{ flex: 1, backgroundColor: '#000', }}>
       {/* <Animated.Text style={[styles.text,{ textShadowRadius: fadeAnim }]}>PRINCE </Animated.Text> */}
       <View style={{ flexDirection: 'row', alignSelf: 'center', top: '50%', backgroundColor: '#fff', height: 200, width: 200 }}>
-        <Animated.View style={{
+        <Animated.View 
+        ref={myRef}
+        style={{
           height: 120, width: 120, backgroundColor: 'blue', marginLeft: 25, position: 'absolute',
            opacity: fadeAnim,
            transform: [{ rotateY: setInterpolate }]
@@ -196,7 +201,14 @@ export default ViewPager = () => {
           height: 120, width: 120, backgroundColor: 'royalblue', position: 'absolute', top: 25,
           transform: [{ rotateY: setInterpolate }]
         }} />
-      
+        <Animated.View style={{
+          height: 120, width: 30, backgroundColor: 'blue', top: 25,
+          transform: [{rotateY:setInterpolate},]
+        }} />
+      <Button title="ok" onPress={()=>{
+        myRef.current._internalFiberInstanceHandleDEV.alternate.mode="hide",
+        console.log(".....", myRef.current._internalFiberInstanceHandleDEV.alternate.mode);
+      }}/>
       </View>
       {/* <Animated.Text style={[styles.text,{ textShadowRadius: fadeAnim }]}>PRINCE </Animated.Text> */}
     </View>

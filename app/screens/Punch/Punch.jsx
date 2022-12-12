@@ -13,6 +13,7 @@ import {
 import PagerView from 'react-native-pager-view';
 import { FlatList } from 'react-native-gesture-handler';
 import { IMAGES } from '../../res/Images'
+import {todayAttend} from '../../api/Apicalling'
 
 
 import {
@@ -294,7 +295,7 @@ const Punch = () => {
 
       <View style={{ flexDirection: 'row', width: '95%', alignSelf: 'center', justifyContent: 'center' }}>
 
-        <Text style={{ borderColor: '#06BEBD', borderWidth: 1, width: '17%', textAlign: 'center' }}>DATE</Text>
+      { tabs=='Monthly'? <Text style={{ borderColor: '#06BEBD', borderWidth: 1, width: '17%', textAlign: 'center' }}>DATE</Text>:null}
         <Text style={styles.tableHeading}>P1</Text>
         <Text style={styles.tableHeading}>P2</Text>
         <Text style={styles.tableHeading}>P3</Text>
@@ -321,7 +322,7 @@ const Punch = () => {
           >
             <View style={{ flexDirection: 'row', alignSelf: 'center', justifyContent: 'center', width: '100%' }}>
 
-              <Text style={{ borderColor: '#06BEBD', borderWidth: 1, width: '17%', textAlign: 'center', fontSize: 10 }}>{item.PUNCH_DATE}</Text>
+            { tabs=='Monthly'?<Text style={{ borderColor: '#06BEBD', borderWidth: 1, width: '17%', textAlign: 'center', fontSize: 10 }}>{item.PUNCH_DATE}</Text>:null}
               <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[0]) }}>{item.PUNCH[0]}</Text>
               <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[1]) }}>{item.PUNCH[1]}</Text>
               <Text style={{ ...styles.tableData, backgroundColor: tableColor(item.PUNCH[2]) }}>{item.PUNCH[2]}</Text>

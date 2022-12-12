@@ -16,8 +16,8 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      {/* <AppStack /> */}
-      <ViewPager/>
+      <AppStack />
+      {/* <ViewPager/> */}
     </Provider>
   );
 };
